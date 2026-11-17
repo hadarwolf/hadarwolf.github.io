@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hadar Wolf · Portfolio</title>
+<meta name="description" content="Hadar Wolf — B.Sc. Electrical Engineering & Computer Science student at the Hebrew University. Projects in AI/ML, systems, hardware and software.">
+<meta property="og:title" content="Hadar Wolf · Portfolio">
+<meta property="og:description" content="AI, software and hardware projects by Hadar Wolf.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%236366f1'/><text x='32' y='43' font-family='Arial' font-weight='700' font-size='28' text-anchor='middle' fill='white'>HW</text></svg>">
+<style>
+  :root {
+    --bg: #f7f7fb; --surface: #ffffff; --surface-2: #f0f1f7; --border: #e3e5ee;
+    --text: #16181f; --muted: #5d6273; --accent: #5b5bf0; --accent-2: #0ea5a4;
+    --accent-soft: rgba(91, 91, 240, .10); --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b0d12; --surface: #13161e; --surface-2: #1a1e28; --border: #252a36;
+      --text: #e8eaf0; --muted: #9aa1b2; --accent: #8b8bff; --accent-2: #2dd4bf;
+      --accent-soft: rgba(139, 139, 255, .12); --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0d12; --surface: #13161e; --surface-2: #1a1e28; --border: #252a36;
+    --text: #e8eaf0; --muted: #9aa1b2; --accent: #8b8bff; --accent-2: #2dd4bf;
+    --accent-soft: rgba(139, 139, 255, .12); --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { font-weight: 800; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; }
+  .logo span.mark {
+    width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 13px;
+  }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-links a { padding: 6px 12px; border-radius: 8px; color: var(--muted); font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+  .theme-btn {
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    width: 34px; height: 34px; border-radius: 8px; cursor: pointer; margin-left: 6px; font-size: 15px;
+  }
+
+  /* Hero */
+  .hero { padding: 96px 0 72px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: -40% -10% auto auto; width: 620px; height: 620px;
+    background: radial-gradient(circle, var(--accent-soft), transparent 65%); pointer-events: none;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft); padding: 6px 12px; border-radius: 999px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-2) 25%, transparent); }
+  h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.05; letter-spacing: -.035em; margin: 22px 0 18px; font-weight: 800; }
+  h1 .grad { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 640px; margin: 0 0 32px; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px;
+    font-weight: 600; font-size: 15px; border: 1px solid var(--border); background: var(--surface);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+  .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .btn svg { width: 18px; height: 18px; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 56px; max-width: 720px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .stat b { display: block; font-size: 24px; letter-spacing: -.02em; }
+  .stat span { font-size: 13px; color: var(--muted); }
+
+  /* Sections */
+  section { padding: 72px 0; }
+  .sec-head { margin-bottom: 32px; }
+  .sec-head .kicker { font: 500 13px "JetBrains Mono", monospace; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; }
+  h2 { font-size: clamp(28px, 4vw, 36px); letter-spacing: -.025em; margin: 6px 0 8px; }
+  .sec-head p { color: var(--muted); margin: 0; max-width: 620px; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { position: relative; padding: 0 0 20px 22px; border-left: 2px solid var(--border); }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent);
+  }
+  .timeline h4 { margin: 0; font-size: 15px; }
+  .timeline .when { font: 12px "JetBrains Mono", monospace; color: var(--muted); }
+  .timeline p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+  .card h3 { margin: 0 0 16px; font-size: 16px; }
+  .skill-group { margin-bottom: 16px; }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-group h5 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
+
+  /* Projects */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .filter {
+    font: 500 14px Inter, sans-serif; padding: 8px 14px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+  }
+  .filter:hover { color: var(--text); }
+  .filter.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .filter .n { opacity: .6; margin-left: 4px; font-size: 12px; }
+
+  .featured { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .proj {
+    display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .proj:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .proj.big { padding: 24px; background: linear-gradient(160deg, var(--surface) 60%, var(--accent-soft)); }
+  .proj .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+  .proj .emoji { font-size: 22px; line-height: 1; }
+  .proj .cat { font: 11px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .proj h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -.01em; }
+  .proj.big h3 { font-size: 20px; }
+  .proj p { margin: 0 0 16px; font-size: 14px; color: var(--muted); flex: 1; }
+  .proj .meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .lang { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+  .lang i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .links { display: flex; gap: 6px; }
+  .links a {
+    font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 7px;
+    background: var(--surface-2); border: 1px solid var(--border);
+  }
+  .links a:hover { border-color: var(--accent); color: var(--accent); }
+  .links a.live { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .links a.live:hover { color: #fff; filter: brightness(1.1); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: -6px 0 14px; }
+  .tags span { font-size: 12px; color: var(--accent); background: var(--accent-soft); padding: 2px 8px; border-radius: 6px; }
+  .hidden { display: none !important; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 40px 0; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 0 16px; }
+    .nav-links a:not(.keep) { display: none; }
+    .hero { padding: 64px 0 48px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .featured, .grid { grid-template-columns: 1fr; }
+    section { padding: 56px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo"><span class="mark">HW</span>Hadar Wolf</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects" class="keep">Projects</a>
+      <a href="https://github.com/hadarwolf" target="_blank" rel="noopener">GitHub</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>Open to student positions</span>
+    <h1>Hi, I'm Hadar.<br><span class="grad">I build across AI, software &amp; hardware.</span></h1>
+    <p class="lead">4th-year B.Sc. Electrical Engineering &amp; Computer Science student at the Hebrew University of Jerusalem. I work on machine learning for medicine, AI agents and automation, systems programming and digital hardware design.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Explore projects
+      </a>
+      <a class="btn" href="https://github.com/hadarwolf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        GitHub profile
+      </a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="statProjects">25+</b><span>public projects</span></div>
+      <div class="stat"><b>8</b><span>languages</span></div>
+      <div class="stat"><b>5</b><span>ML assignments</span></div>
+      <div class="stat"><b>5</b><span>VLSI labs</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">// about</div>
+      <h2>Experience &amp; skills</h2>
+      <p>A dual EE + CS background: comfortable from RTL and memory management up to neural networks and LLM agents.</p>
+    </div>
+    <div class="about-grid">
+      <div class="card">
+        <h3>Experience</h3>
+        <ul class="timeline">
+          <li>
+            <h4>AI Engineer — Student Position, Hadassah Medical Center</h4>
+            <div class="when">2025 – 2026</div>
+            <p>Predictive ML model to forecast the need for C-sections; clinical data pipelines and classification on patient data.</p>
+          </li>
+          <li>
+            <h4>Capstone — Clubfoot Recurrence Detection</h4>
+            <div class="when">Hebrew University × Shaare Zedek</div>
+            <p>Low-cost gyroscope sensor system with Kalman filtering and GMM/HMM gait classification.</p>
+          </li>
+          <li>
+            <h4>Python Instructor, Py.terim</h4>
+            <div class="when">2024 – 2025</div>
+            <p>Taught Python to combat-veteran rehab participants and STEM to new immigrants.</p>
+          </li>
+          <li>
+            <h4>IDF Armored Corps</h4>
+            <div class="when">Commander course · active reservist</div>
+            <p>Leadership, responsibility and working under pressure.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Toolbox</h3>
+        <div class="skill-group">
+          <h5>Languages</h5>
+          <div class="chips"><span class="chip">Python</span><span class="chip">C</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">SystemVerilog</span><span class="chip">MATLAB</span><span class="chip">SQL</span></div>
+        </div>
+        <div class="skill-group">
+          <h5>AI / ML</h5>
+          <div class="chips"><span class="chip">PyTorch</span><span class="chip">NumPy</span><span class="chip">XGBoost</span><span class="chip">Transformers</span><span class="chip">GMM / HMM</span><span class="chip">LLM agents</span><span class="chip">smolagents</span></div>
+        </div>
+        <div class="skill-group">
+          <h5>Systems &amp; hardware</h5>
+          <div class="chips"><span class="chip">Linux</span><span class="chip">Multithreading</span><span class="chip">Virtual memory</span><span class="chip">RTL design</span><span class="chip">ModelSim</span><span class="chip">Arduino</span><span class="chip">Signal processing</span><span class="chip">Kalman filters</span></div>
+        </div>
+        <div class="skill-group">
+          <h5>Tools</h5>
+          <div class="chips"><span class="chip">Git / GitHub</span><span class="chip">GitHub Actions</span><span class="chip">Vercel</span><span class="chip">Claude Code</span><span class="chip">Gradio</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="padding-top: 24px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">// projects</div>
+      <h2>Things I've built</h2>
+      <p>Personal projects first, then coursework organized by area. Every card links to its source on GitHub.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="featured" id="featured"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Hadar Wolf · Jerusalem, Israel</span>
+    <a href="https://github.com/hadarwolf" target="_blank" rel="noopener">github.com/hadarwolf →</a>
+  </div>
+</footer>
+
+<script>
+  const GH = "https://github.com/hadarwolf/";
+  const LANG = {
+    Python: "#3572A5", C: "#555555", "C++": "#f34b7d", Java: "#b07219", HTML: "#e34c26",
+    SystemVerilog: "#DAE1C2", "Jupyter Notebook": "#DA5B0B", JavaScript: "#f1e05a"
+  };
+  const CATS = [
+    { id: "all", label: "All" },
+    { id: "ai", label: "AI & Automation" },
+    { id: "ml", label: "Machine Learning" },
+    { id: "systems", label: "Systems & C/C++" },
+    { id: "hw", label: "Hardware / VLSI" },
+    { id: "oop", label: "Java & OOP" },
+    { id: "web", label: "Games & Web" },
+  ];
+  const P = [
+    // Featured personal projects
+    { repo: "daily-brief", name: "Daily Brief", emoji: "☀️", cat: "ai", lang: "Python", featured: true,
+      live: "https://daily-brief-hadar19.vercel.app",
+      tags: ["LLM pipeline", "GitHub Actions", "Vercel", "Bilingual"],
+      desc: "A mobile-first morning brief that replaces doomscrolling: geopolitics, Israeli politics, markets, sports and ideas — each readable in 30 sec, 3 min or 10 min, in English or Hebrew, with a daily quiz." },
+    { repo: "jod-search-automation", name: "Job Radar", emoji: "🎯", cat: "ai", lang: "HTML", featured: true,
+      tags: ["Agentic workflow", "Scheduled task", "Dashboard"],
+      desc: "Personal job-search automation: sources leads from alert emails and public career pages, filters them against a skills profile with hard eligibility rules, and tracks them in a live static dashboard." },
+    { repo: "sports-morning-brief", name: "Sports Morning Brief", emoji: "⚽", cat: "ai", lang: "Python",
+      desc: "Pulls standings, form and fixtures for the teams you follow plus last night's NBA scores, then has an LLM write a personalized, conversational morning brief." },
+    { repo: "hugging-face-ai-agents", name: "Hugging Face AI Agent", emoji: "🤖", cat: "ai", lang: "Python",
+      desc: "A smolagents CodeAgent with custom tools (timezone, weather, image generation) served through a Gradio chat UI." },
+    { repo: "Lab1", name: "CTF Arena", emoji: "🚩", cat: "web", lang: "HTML",
+      desc: "A capture-the-flag arena game in a single HTML file — canvas rendering, team AI and juicy effects. Built in an agentic-programming course." },
+    { repo: "Boggle", name: "Boggle Solver", emoji: "🔤", cat: "web", lang: "Python",
+      desc: "Playable Boggle game with a GUI and a dictionary-based word finder." },
+    { repo: "HTML_practice", name: "HTML & CSS Practice", emoji: "🎨", cat: "web", lang: "HTML",
+      desc: "A small multi-page static website exploring layout and styling fundamentals." },
+
+    // Machine learning
+    { repo: "iml-ex1", name: "Learning Theory: ERM Experiments", emoji: "📐", cat: "ml", lang: "Python",
+      desc: "Simulations of empirical risk minimization over sets of 'prophets' — approximation vs. estimation error as sample size and hypothesis class grow." },
+    { repo: "iml-ex2", name: "k-NN & Anomaly Detection", emoji: "📍", cat: "ml", lang: "Python",
+      desc: "k-nearest-neighbours classification, decision boundaries and distance-based anomaly detection." },
+    { repo: "iml-ex3", name: "Neural Nets in PyTorch", emoji: "🧠", cat: "ml", lang: "Python",
+      desc: "Training and evaluating PyTorch models on binary and multiclass tasks, with learning-rate and regularization studies." },
+    { repo: "iml-ex4", name: "MLP, CNN & XGBoost", emoji: "🖼️", cat: "ml", lang: "Jupyter Notebook",
+      desc: "Comparing multilayer perceptrons, convolutional networks and gradient-boosted trees on image and tabular data." },
+    { repo: "iml-ex5", name: "Transformers & Mixture Models", emoji: "📜", cat: "ml", lang: "Python",
+      desc: "A character-level transformer language model trained on Shakespeare, plus Gaussian mixture models fit with EM." },
+    { repo: "ex4_C", name: "MLP Network in C++", emoji: "🔢", cat: "ml", lang: "C++",
+      desc: "A from-scratch multilayer perceptron: custom Matrix class, Dense layers and activation functions with operator overloading." },
+
+    // Systems
+    { repo: "OS_ex2_mapReduce", name: "MapReduce Framework", emoji: "⚙️", cat: "systems", lang: "C++",
+      desc: "A multithreaded MapReduce library (map → shuffle → reduce) with atomic counters, barriers and job-state tracking." },
+    { repo: "os-ex3", name: "Virtual Memory", emoji: "🧮", cat: "systems", lang: "C",
+      desc: "Hierarchical page-table virtual memory over simulated physical memory, with frame eviction and page swapping." },
+    { repo: "ex3b-hadar19", name: "Markov Chain Generator", emoji: "🔗", cat: "systems", lang: "C",
+      desc: "Generic Markov-chain engine with linked lists and function pointers, driving a tweet generator and a Snakes & Ladders simulator." },
+    { repo: "Ex3a_C", name: "Tweet Generator", emoji: "🐦", cat: "systems", lang: "C",
+      desc: "Markov-chain text generator that learns word transitions from a tweet corpus." },
+    { repo: "ex2-hadar19", name: "Bus Line Sorting", emoji: "🚌", cat: "systems", lang: "C",
+      desc: "Sorting algorithms (bubble, quick sort) over bus-line structs with full unit tests." },
+    { repo: "ex1-hadar19", name: "Cipher", emoji: "🔐", cat: "systems", lang: "C",
+      desc: "Caesar cipher encoder/decoder CLI with input validation and tests." },
+
+    // Hardware
+    { repo: "frontend-vlsi-lab1", name: "Safe-Box Key Logic", emoji: "🔒", cat: "hw", lang: "SystemVerilog",
+      desc: "Combinational lock logic at RTL and gate level using a standard-cell library, with testbench." },
+    { repo: "frontend-vlsi-lab2", name: "ALU Design", emoji: "➕", cat: "hw", lang: "SystemVerilog",
+      desc: "Parameterized arithmetic-logic unit with a self-checking testbench." },
+    { repo: "frontend-vlsi-lab3", name: "GCD, Shifter & Power-On FSM", emoji: "🔁", cat: "hw", lang: "SystemVerilog",
+      desc: "Sequential designs: a GCD datapath + controller, barrel shifter and power-on reset sequencer." },
+    { repo: "frontend-vlsi-lab4", name: "Sine Generator & Integrator", emoji: "〰️", cat: "hw", lang: "SystemVerilog",
+      desc: "LUT-based sine-wave generator and digital integrator — DSP building blocks in hardware." },
+    { repo: "frontend-vlsi-lab5", name: "Clock-Domain Crossing", emoji: "⏱️", cat: "hw", lang: "SystemVerilog",
+      desc: "Synchronizers, pulse sync and a sync bridge for safely moving signals between clock domains." },
+
+    // Java / OOP
+    { repo: "ex5-oop", name: "s-Java Code Verifier", emoji: "✅", cat: "oop", lang: "Java",
+      desc: "Static verifier for a simplified Java-like language: parses scopes, variables, methods and parameters and reports illegal code." },
+    { repo: "tictacto", name: "Tic-Tac-Toe Tournament", emoji: "❌", cat: "oop", lang: "Java",
+      desc: "Extensible tic-tac-toe engine with factory-built players (human, whatever, clever, genius) and pluggable renderers." },
+    { repo: "ex3-ascii-art", name: "ASCII Art Generator", emoji: "🖼️", cat: "oop", lang: "Java",
+      desc: "Converts images to ASCII art by matching character brightness, with a CLI shell and HTML/console output." },
+    { repo: "ex0-chatbot", name: "Chatterbot", emoji: "💬", cat: "oop", lang: "Java",
+      desc: "Two bots in conversation — a first OOP exercise in classes, state and randomized replies." },
+  ];
+
+  const $ = s => document.querySelector(s);
+  const card = (p, big) => `
+    <article class="proj${big ? " big" : ""}" data-cat="${p.cat}">
+      <div class="top"><span class="emoji">${p.emoji}</span><span class="cat">${CATS.find(c => c.id === p.cat).label}</span></div>
+      <h3>${p.name}</h3>
+      ${p.tags ? `<div class="tags">${p.tags.map(t => `<span>${t}</span>`).join("")}</div>` : ""}
+      <p>${p.desc}</p>
+      <div class="meta">
+        <span class="lang"><i style="background:${LANG[p.lang] || "#888"}"></i>${p.lang}</span>
+        <span class="links">
+          ${p.live ? `<a class="live" href="${p.live}" target="_blank" rel="noopener">Live ↗</a>` : ""}
+          <a href="${GH + p.repo}" target="_blank" rel="noopener">Code</a>
+        </span>
+      </div>
+    </article>`;
+
+  $("#featured").innerHTML = P.filter(p => p.featured).map(p => card(p, true)).join("");
+  $("#grid").innerHTML = P.filter(p => !p.featured).map(p => card(p)).join("");
+  $("#statProjects").textContent = P.length;
+
+  $("#filters").innerHTML = CATS.map(c => {
+    const n = c.id === "all" ? P.length : P.filter(p => p.cat === c.id).length;
+    return `<button class="filter${c.id === "all" ? " active" : ""}" data-f="${c.id}">${c.label}<span class="n">${n}</span></button>`;
+  }).join("");
+  $("#filters").addEventListener("click", e => {
+    const b = e.target.closest(".filter"); if (!b) return;
+    document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x === b));
+    const f = b.dataset.f;
+    document.querySelectorAll(".proj").forEach(el => el.classList.toggle("hidden", f !== "all" && el.dataset.cat !== f));
+    $("#featured").classList.toggle("hidden", !$("#featured").querySelector(".proj:not(.hidden)"));
+  });
+
+  $("#year").textContent = new Date().getFullYear();
+
+  const root = document.documentElement;
+  try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+  $("#themeBtn").addEventListener("click", () => {
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  });
+</script>
+</body>
+</html>
